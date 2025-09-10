@@ -74,6 +74,51 @@ body {
     font-weight: bold;
 }
 
+.logo {
+    height: 3rem;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-brand a,
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.brand-name {
+    color: rgb(var(--color-accent));
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: -0.025em;
+    transition: all 0.2s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand:hover .brand-name {
+    color: rgb(var(--color-accent) / 0.8);
+    transform: translateY(-1px);
+}
+
+.brand-link:hover .brand-name {
+    color: rgb(var(--color-accent) / 0.8);
+    transform: translateY(-1px);
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -394,6 +439,28 @@ body {
     font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 1rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    height: 2.5rem;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Make logo white for dark footer */
+}
+
+.footer-brand-name {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    letter-spacing: -0.025em;
 }
 
 .footer-section ul {
@@ -829,6 +896,29 @@ body {
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+    }
+    
+    .logo {
+        height: 2.5rem;
+        max-width: 150px;
+    }
+    
+    .brand-name {
+        font-size: 1.25rem;
+    }
+    
+    .nav-brand {
+        gap: 0.5rem;
+    }
+    
+    .footer-brand {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .footer-brand-name {
+        font-size: 1.125rem;
     }
     
     .hero-title {

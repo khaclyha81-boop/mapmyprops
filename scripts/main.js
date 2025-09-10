@@ -564,6 +564,195 @@ function closeModal() {
     }
 }
 
+// Cookie Consent Management
+function showCookieConsent() {
+    if (localStorage.getItem('mapmyprops-cookie-consent')) {
+        return; // Already consented
+    }
+
+    const cookieBanner = document.createElement('div');
+    cookieBanner.id = 'cookie-banner';
+    cookieBanner.innerHTML = `
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h4>We use cookies</h4>
+                <p>This website uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. We also use Google Analytics and may use Google Ads.</p>
+            </div>
+            <div class="cookie-actions">
+                <button onclick="acceptCookies()" class="cookie-btn accept">Accept All</button>
+                <button onclick="declineCookies()" class="cookie-btn decline">Decline</button>
+                <a href="privacy-policy.html" class="cookie-link">Learn More</a>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(cookieBanner);
+
+    // Add cookie banner styles
+    if (!document.querySelector('#cookie-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'cookie-styles';
+        styles.textContent = `
+            #cookie-banner {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                color: white;
+                padding: 1.5rem;
+                z-index: 10000;
+                backdrop-filter: blur(10px);
+                border-top: 3px solid rgb(var(--color-accent));
+                animation: slideUp 0.3s ease-out;
+            }
+            
+            @keyframes slideUp {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+            
+            .cookie-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+            
+            .cookie-text h4 {
+                margin: 0 0 0.5rem 0;
+                font-size: 1.125rem;
+                color: white;
+            }
+            
+            .cookie-text p {
+                margin: 0;
+                opacity: 0.9;
+                line-height: 1.4;
+                max-width: 600px;
+            }
+            
+            .cookie-actions {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            
+            .cookie-btn {
+                padding: 0.75rem 1.5rem;
+                border: none;
+                border-radius: 0.5rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+            
+            .cookie-btn.accept {
+                background: rgb(var(--color-accent));
+                color: white;
+            }
+            
+            .cookie-btn.accept:hover {
+                opacity: 0.9;
+                transform: translateY(-1px);
+            }
+            
+            .cookie-btn.decline {
+                background: transparent;
+                color: white;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            
+            .cookie-btn.decline:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            .cookie-link {
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: underline;
+                font-size: 0.9rem;
+            }
+            
+            .cookie-link:hover {
+                color: white;
+            }
+            
+            @media (max-width: 768px) {
+                .cookie-content {
+                    flex-direction: column;
+                    text-align: center;
+                    gap: 1rem;
+                }
+                
+                .cookie-actions {
+                    justify-content: center;
+                    width: 100%;
+                }
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('mapmyprops-cookie-consent', 'accepted');
+    localStorage.setItem('mapmyprops-cookie-date', new Date().toISOString());
+    hideCookieBanner();
+    
+    // Enable analytics/tracking here
+    console.log('Cookies accepted - analytics enabled');
+}
+
+function declineCookies() {
+    localStorage.setItem('mapmyprops-cookie-consent', 'declined');
+    localStorage.setItem('mapmyprops-cookie-date', new Date().toISOString());
+    hideCookieBanner();
+    
+    // Disable non-essential cookies
+    console.log('Cookies declined - only essential cookies');
+}
+
+function hideCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.animation = 'slideDown 0.3s ease-out forwards';
+        setTimeout(() => banner.remove(), 300);
+    }
+}
+
+// Show cookie banner on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(showCookieConsent, 1000); // Show after 1 second
+});
+
+// Navigation helper for legal pages
+function navigateToAction(action) {
+    // Store the action in sessionStorage
+    sessionStorage.setItem('pendingAction', action);
+    // Navigate to home page
+    window.location.href = 'index.html';
+}
+
+// Check for pending actions on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const pendingAction = sessionStorage.getItem('pendingAction');
+    if (pendingAction) {
+        // Clear the pending action
+        sessionStorage.removeItem('pendingAction');
+        // Execute the action after a short delay
+        setTimeout(() => {
+            if (pendingAction === 'buy' || pendingAction === 'rent' || pendingAction === 'sell' || pendingAction === 'mortgage') {
+                showContactForm(pendingAction);
+            }
+        }, 500);
+    }
+});
+
 // Console welcome message
 console.log('%cWelcome to MapMyProps!', 'color: rgb(79, 70, 229); font-size: 18px; font-weight: bold;');
 console.log('This is a demo real estate marketplace. Try switching themes with the 🎨 button!');
