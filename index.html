@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="indigo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapMyProps - Find Your Dream Home</title>
+    <meta name="description" content="Discover homes for sale and rent with MapMyProps. Search properties, explore neighborhoods, and find your perfect home.">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <h1>MapMyProps</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="#buy">Buy</a>
+                    <a href="#rent">Rent</a>
+                    <a href="#sell">Sell</a>
+                    <a href="#mortgage">Mortgage</a>
+                </div>
+                <div class="theme-switcher">
+                    <button id="theme-toggle" class="theme-btn">🎨</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Find Your Dream Home</h1>
+            <p class="hero-subtitle">Search homes for sale and rent across the country</p>
+            
+            <!-- Global Search -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="search-input"
+                        placeholder="Enter city, neighborhood, ZIP, or address"
+                        class="search-input"
+                    />
+                    <button class="search-btn" onclick="handleSearch()">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section class="quick-nav">
+        <div class="container">
+            <div class="nav-grid">
+                <div class="nav-card" id="buy">
+                    <h3>Buy</h3>
+                    <p>Find homes for sale in your area</p>
+                    <button class="nav-card-btn" onclick="showContactForm('buy')">Browse Homes →</button>
+                </div>
+                
+                <div class="nav-card" id="rent">
+                    <h3>Rent</h3>
+                    <p>Discover rental properties</p>
+                    <button class="nav-card-btn" onclick="showContactForm('rent')">Find Rentals →</button>
+                </div>
+                
+                <div class="nav-card" id="sell">
+                    <h3>Sell</h3>
+                    <p>Get your home's value</p>
+                    <button class="nav-card-btn" onclick="showContactForm('sell')">Get Started →</button>
+                </div>
+                
+                <div class="nav-card" id="mortgage">
+                    <h3>Mortgage</h3>
+                    <p>Calculate your payments</p>
+                    <button class="nav-card-btn" onclick="showContactForm('mortgage')">Get Pre-approved →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cities -->
+    <section class="featured-cities">
+        <div class="container">
+            <h2 class="section-title">Explore Popular Cities</h2>
+            <div class="cities-grid">
+                <button class="city-card" onclick="searchCity('New York, NY')">
+                    <span class="city-name">New York, NY</span>
+                </button>
+                <button class="city-card" onclick="searchCity('Los Angeles, CA')">
+                    <span class="city-name">Los Angeles, CA</span>
+                </button>
+                <button class="city-card" onclick="searchCity('Chicago, IL')">
+                    <span class="city-name">Chicago, IL</span>
+                </button>
+                <button class="city-card" onclick="searchCity('Houston, TX')">
+                    <span class="city-name">Houston, TX</span>
+                </button>
+                <button class="city-card" onclick="searchCity('Phoenix, AZ')">
+                    <span class="city-name">Phoenix, AZ</span>
+                </button>
+                <button class="city-card" onclick="searchCity('Philadelphia, PA')">
+                    <span class="city-name">Philadelphia, PA</span>
+                </button>
+                <button class="city-card" onclick="searchCity('San Antonio, TX')">
+                    <span class="city-name">San Antonio, TX</span>
+                </button>
+                <button class="city-card" onclick="searchCity('San Diego, CA')">
+                    <span class="city-name">San Diego, CA</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Statistics -->
+    <section class="market-stats">
+        <div class="container">
+            <h2 class="section-title">Market Insights</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2.3M+</div>
+                    <div class="stat-label">Homes for Sale</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">850K+</div>
+                    <div class="stat-label">Rental Properties</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$425K</div>
+                    <div class="stat-label">Median Home Price</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Why Choose MapMyProps?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Advanced Search</h3>
+                    <p>Find exactly what you're looking for with our powerful search filters and map-based browsing.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Market Analysis</h3>
+                    <p>Get accurate home valuations and market trends to make informed buying and selling decisions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Expert Agents</h3>
+                    <p>Connect with top-rated local agents who know your market and can guide you through the process.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobile Ready</h3>
+                    <p>Search and manage your property interests on-the-go with our responsive design and mobile app.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Secure & Safe</h3>
+                    <p>Your data is protected with bank-level security and we verify all property listings for accuracy.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Fast & Easy</h3>
+                    <p>Streamlined processes from search to close, making your real estate journey smooth and efficient.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Listings Preview -->
+    <section class="listings-preview">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <div class="listings-grid">
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-binyaminmellish-186077.jpg" alt="Beautiful Family Home" class="property-image">
+                        <div class="price-tag">$450,000</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Beautiful Family Home</h3>
+                        <p class="listing-specs">3 bed • 2 bath • 1,800 sqft</p>
+                        <p class="listing-address">123 Main St, Austin, TX</p>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-alex-staudinger-829197-1732414.jpg" alt="Modern Downtown Apartment" class="property-image">
+                        <div class="price-tag">$2,200/mo</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Modern Downtown Apartment</h3>
+                        <p class="listing-specs">2 bed • 1 bath • 1,200 sqft</p>
+                        <p class="listing-address">456 Oak Ave, Seattle, WA</p>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-pixabay-280222.jpg" alt="Luxury Suburban Villa" class="property-image">
+                        <div class="price-tag">$725,000</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Luxury Suburban Villa</h3>
+                        <p class="listing-specs">4 bed • 3 bath • 2,500 sqft</p>
+                        <p class="listing-address">789 Pine Dr, Denver, CO</p>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-asphotograpy-101808.jpg" alt="Cozy Cottage Home" class="property-image">
+                        <div class="price-tag">$365,000</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Cozy Cottage Home</h3>
+                        <p class="listing-specs">2 bed • 2 bath • 1,400 sqft</p>
+                        <p class="listing-address">321 Maple Lane, Portland, OR</p>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-pixabay-280229.jpg" alt="Modern Contemporary House" class="property-image">
+                        <div class="price-tag">$895,000</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Modern Contemporary House</h3>
+                        <p class="listing-specs">5 bed • 4 bath • 3,200 sqft</p>
+                        <p class="listing-address">567 Vista Boulevard, San Jose, CA</p>
+                    </div>
+                </div>
+
+                <div class="listing-card">
+                    <div class="listing-image">
+                        <img src="images/pexels-joshsorenson-427649.jpg" alt="Charming Ranch Style" class="property-image">
+                        <div class="price-tag">$525,000</div>
+                    </div>
+                    <div class="listing-details">
+                        <h3>Charming Ranch Style</h3>
+                        <p class="listing-specs">3 bed • 2 bath • 2,100 sqft</p>
+                        <p class="listing-address">890 Country Road, Nashville, TN</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"MapMyProps made finding our dream home so easy! The search filters helped us narrow down exactly what we wanted, and the agent recommendations were spot on."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Sarah Johnson</strong>
+                            <span>Austin, TX</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Selling our home was stress-free thanks to MapMyProps. The market analysis was accurate and we sold for above asking price within two weeks!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Michael Chen</strong>
+                            <span>Seattle, WA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As a first-time buyer, I needed all the help I could get. MapMyProps connected me with an amazing agent who guided me through every step."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <strong>Emily Rodriguez</strong>
+                            <span>Denver, CO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Find Your Perfect Home?</h2>
+                <p>Join thousands of satisfied customers who found their dream properties with MapMyProps</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn primary" onclick="showContactForm('buy')">Start Buying</button>
+                    <button class="cta-btn secondary" onclick="showContactForm('sell')">Sell My Home</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MapMyProps</h4>
+                    <p>Your trusted partner in finding the perfect home.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Buy</h4>
+                    <ul>
+                        <li><a href="#" onclick="showContactForm('buy')">Homes for Sale</a></li>
+                        <li><a href="#" onclick="showContactForm('buy')">Open Houses</a></li>
+                        <li><a href="#" onclick="showContactForm('buy')">New Homes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Rent</h4>
+                    <ul>
+                        <li><a href="#" onclick="showContactForm('rent')">Apartments</a></li>
+                        <li><a href="#" onclick="showContactForm('rent')">Houses</a></li>
+                        <li><a href="#" onclick="showContactForm('rent')">Condos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="fair-housing.html">Fair Housing</a></li>
+                        <li><a href="#" onclick="navigateTo('market-data')">Market Data</a></li>
+                        <li><a href="#" onclick="navigateTo('neighborhood-guides')">Neighborhood Guides</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MapMyProps. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
