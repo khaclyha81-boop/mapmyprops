@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('.nav-links a');
+    // Add smooth scrolling for anchor navigation links only
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
