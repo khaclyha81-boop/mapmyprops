@@ -506,7 +506,26 @@ function handleFormSubmit(event) {
 
     // Simulate form submission
     setTimeout(() => {
-        showFormSuccess(data);
+        // Save lead data to localStorage for demo purposes
+        const leads = JSON.parse(localStorage.getItem('mapmyprops-leads') || '[]');
+        leads.push({
+            ...data,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+        });
+        localStorage.setItem('mapmyprops-leads', JSON.stringify(leads));
+        
+        // Redirect to thank you page with data
+        const params = new URLSearchParams({
+            name: data.name,
+            email: data.email,
+            area: data.area,
+            interest: data.interest
+        });
+        if (data.budget) params.append('budget', data.budget);
+        if (data.timeline) params.append('timeline', data.timeline);
+        
+        window.location.href = `thank-you.html?${params.toString()}`;
     }, 1500);
 }
 
